@@ -1,11 +1,25 @@
 <div class="container" ng-controller="JSDemoCtrl">
-  <div class="row">
-    <h4>hello.js:</h4>
-    <!--<pre><code><div id="js_hello_wrapper"></div></code></pre>-->
-    <a href="#" editable-textarea="js_hello_source" onbeforesave="save_hello($data)" e-rows="6" e-cols="80">
-      <pre ng-bind-html="js_hello_hl"></pre>
-    </a>
-    <h4>i2c.js:</h4>
-    <pre><code><div id="js_i2c_wrapper"></div></code></pre>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#jshello">JS Hello</a></li>
+    <li><a data-toggle="tab" data-target="#jsleds">JS LEDs</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="jshello" class="tab-pane fade in active">
+      <h4>hello.js (click to edit):</h4>
+      <!--<pre><code><div id="js_hello_wrapper"></div></code></pre>-->
+      <a href="#" editable-textarea="js_hello_source" onbeforesave="save_hello($data)" e-rows="6" e-cols="80">
+        <pre ng-bind-html="js_hello_hl"></pre>
+      </a>
+    </div>
+    <div id="jsleds" class="tab-pane fade">
+      <h4>i2c.js (click to edit):</h4>
+      <!--<pre><code><div id="js_i2c_wrapper"></div></code></pre>-->
+      <a href="#" editable-textarea="js_i2c_source" onbeforesave="save_i2c($data)" e-rows="40" e-cols="80">
+        <pre ng-bind-html="js_i2c_hl"></pre>
+      </a>
+    </div>
   </div>
+
 </div>

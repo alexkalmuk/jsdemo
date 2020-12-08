@@ -17,6 +17,7 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.js_hello_source = null;
     $scope.js_hello_hl = null;
     $scope.js_i2c_source = null;
+    $scope.js_i2c_hl = null;
 
     $scope.run_hello = function() {
         $scope.js_hello_output = "bzz";
@@ -24,6 +25,10 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
 
     $scope.save_hello = function(data) {
 		$scope.js_hello_hl = hljs.highlightAuto(data).value;
+    };
+
+    $scope.save_i2c = function(data) {
+		$scope.js_i2c_hl = hljs.highlightAuto(data).value;
     };
 
     $scope.update = function() {
@@ -37,7 +42,8 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
         $http.get('cgi-bin/cat_file.py?path=i2c.js').then(function (r) {
 			$scope.js_i2c_source = r.data;
 			let hlcode = hljs.highlightAuto($scope.js_i2c_source).value;
-    		document.getElementById("js_i2c_wrapper").innerHTML = hlcode;
+			//document.getElementById("js_i2c_wrapper").innerHTML = hlcode;
+			$scope.js_i2c_hl = hlcode;
         });
     };
 
@@ -63,7 +69,7 @@ app.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'partials/system.html',
     }).
     otherwise({
-        redirectTo: '/interfaces'
+        redirectTo: '/jsdemo'
     });
 }]);
 
