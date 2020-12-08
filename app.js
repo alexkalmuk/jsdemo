@@ -1,12 +1,18 @@
 'use strict';
 
-angular.module("HttpAdmin", ['ngRoute', 'ngSanitize', 'ui.bootstrap'])
-.controller("NavBarCtrl", ['$scope', '$location', function($scope, $location) {
+var app = angular.module("HttpAdmin", ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'xeditable'])
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'bs3', 'default'
+});
+
+app.controller("NavBarCtrl", ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function(id) {
         return $location.path().indexOf('/' + id) == 0;
     };
-}])
-.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
+}]);
+
+app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.js_hello_output = null;
     $scope.js_hello_source = null;
     $scope.js_hello_hl = null;
@@ -14,6 +20,10 @@ angular.module("HttpAdmin", ['ngRoute', 'ngSanitize', 'ui.bootstrap'])
 
     $scope.run_hello = function() {
         $scope.js_hello_output = "bzz";
+    };
+
+    $scope.save_hello = function(data) {
+		$scope.js_hello_hl = hljs.highlightAuto(data).value;
     };
 
     $scope.update = function() {
@@ -32,8 +42,9 @@ angular.module("HttpAdmin", ['ngRoute', 'ngSanitize', 'ui.bootstrap'])
     };
 
 	$scope.update();
-}])
-.controller("SystemCtrl", ['$scope', '$http', function($scope, $http) {
+}]);
+
+app.controller("SystemCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.version = null;
 
     $scope.update = function() {
@@ -41,8 +52,9 @@ angular.module("HttpAdmin", ['ngRoute', 'ngSanitize', 'ui.bootstrap'])
     };
 
     $scope.update();
-}])
-.config(['$routeProvider', function($routeProvider) {
+}]);
+
+app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/jsdemo', {
         templateUrl: 'partials/jsdemo.html',

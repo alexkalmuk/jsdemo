@@ -2,7 +2,9 @@
   <div class="row">
     <h4>hello.js:</h4>
     <!--<pre><code><div id="js_hello_wrapper"></div></code></pre>-->
-    <pre ng-bind-html="js_hello_hl"></pre>
+    <a href="#" editable-textarea="js_hello_source" onbeforesave="save_hello($data)" e-rows="6" e-cols="80">
+      <pre ng-bind-html="js_hello_hl"></pre>
+    </a>
     <h4>i2c.js:</h4>
     <pre><code><div id="js_i2c_wrapper"></div></code></pre>
   </div>
