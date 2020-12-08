@@ -1,5 +1,6 @@
 # jsdemo
 
 ```
-python3 -m http.server -d ~/jsdemo/ --cgi
+$ cd <jsdemo path>
+$ python3 -m http.server --cgi
 ```
