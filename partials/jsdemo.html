@@ -1,9 +1,11 @@
 <div class="container" ng-controller="JSDemoCtrl">
 
   <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" data-target="#jshello">JS Hello</a></li>
-    <li><a data-toggle="tab" data-target="#jsleds">JS LEDs</a></li>
+    <li class="active"><a id="123" data-toggle="tab" data-target="#jshello" ng-click="click_hello()">Hello</a></li>
+    <li><a id="hel" data-toggle="tab" data-target="#jsleds" ng-click="click_leds()">LED Show</a></li>
   </ul>
+
+  <button type="submit" class="btn btn-success pull-right" ng-click="run_js()">Run</button>
 
   <div class="tab-content">
     <div id="jshello" class="tab-pane fade in active">

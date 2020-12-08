@@ -19,16 +19,40 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.js_i2c_source = null;
     $scope.js_i2c_hl = null;
 
+	$scope.active_example_source = null;
+
     $scope.run_hello = function() {
         $scope.js_hello_output = "bzz";
     };
 
     $scope.save_hello = function(data) {
 		$scope.js_hello_hl = hljs.highlightAuto(data).value;
+		$scope.active_example_source = data;
     };
 
     $scope.save_i2c = function(data) {
 		$scope.js_i2c_hl = hljs.highlightAuto(data).value;
+		$scope.active_example_source = data;
+    };
+
+
+	// FIXME Remove click_hello() and clicks_leds() and use
+	// shown.bs.tab instead to handle active tab.
+
+	//$('.nav-tabs a').on('shown.bs.tab', function(event) {
+	//	alert($(event.target).text());
+	//});
+
+    $scope.click_hello = function() {
+		$scope.active_example_source = $scope.js_hello_source;
+    };
+
+    $scope.click_leds = function() {
+		$scope.active_example_source = $scope.js_i2c_source;
+    };
+
+    $scope.run_js = function() {
+		//alert($scope.active_example_source)
     };
 
     $scope.update = function() {
