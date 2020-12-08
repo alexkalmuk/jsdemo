@@ -1,7 +1,8 @@
 <div class="container" ng-controller="JSDemoCtrl">
   <div class="row">
     <h4>hello.js:</h4>
-    <pre><code><div id="js_hello_wrapper"></div></code></pre>
+    <!--<pre><code><div id="js_hello_wrapper"></div></code></pre>-->
+    <pre ng-bind-html="js_hello_hl"></pre>
     <h4>i2c.js:</h4>
     <pre><code><div id="js_i2c_wrapper"></div></code></pre>
   </div>
