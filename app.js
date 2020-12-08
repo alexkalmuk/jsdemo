@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("HttpAdmin", ['ngRoute', 'ui.bootstrap'])
+angular.module("HttpAdmin", ['ngRoute', 'ngSanitize', 'ui.bootstrap'])
 .controller("NavBarCtrl", ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function(id) {
         return $location.path().indexOf('/' + id) == 0;
@@ -9,6 +9,7 @@ angular.module("HttpAdmin", ['ngRoute', 'ui.bootstrap'])
 .controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.js_hello_output = null;
     $scope.js_hello_source = null;
+    $scope.js_hello_hl = null;
     $scope.js_i2c_source = null;
 
     $scope.run_hello = function() {
@@ -19,7 +20,8 @@ angular.module("HttpAdmin", ['ngRoute', 'ui.bootstrap'])
         $http.get('cgi-bin/cat_file.py?path=hello.js').then(function (r) {
 			$scope.js_hello_source = r.data;
 			let hlcode = hljs.highlightAuto($scope.js_hello_source).value;
-    		document.getElementById("js_hello_wrapper").innerHTML = hlcode;
+			//document.getElementById("js_hello_wrapper").innerHTML = hlcode;
+			$scope.js_hello_hl = hlcode;
         });
 
         $http.get('cgi-bin/cat_file.py?path=i2c.js').then(function (r) {
