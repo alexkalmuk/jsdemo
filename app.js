@@ -19,20 +19,14 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.js_i2c_source = null;
     $scope.js_i2c_hl = null;
 
-	$scope.active_example_source = null;
-
-    $scope.run_hello = function() {
-        $scope.js_hello_output = "bzz";
-    };
+	$scope.active_example = "hello";
 
     $scope.save_hello = function(data) {
 		$scope.js_hello_hl = hljs.highlightAuto(data).value;
-		$scope.active_example_source = data;
     };
 
     $scope.save_i2c = function(data) {
 		$scope.js_i2c_hl = hljs.highlightAuto(data).value;
-		$scope.active_example_source = data;
     };
 
 
@@ -44,16 +38,30 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
 	//});
 
     $scope.click_hello = function() {
-		$scope.active_example_source = $scope.js_hello_source;
+		$scope.active_example = "hello";
     };
 
     $scope.click_leds = function() {
-		$scope.active_example_source = $scope.js_i2c_source;
+		$scope.active_example = "i2c";
     };
 
-    $scope.run_js = function() {
-		//alert($scope.active_example_source)
-    };
+	$scope.run_js = function() {
+		switch ($scope.active_example) {
+		case "hello":
+			$http.get('cgi-bin/run_file.py?path=hello.js').then(function (r) {
+				$scope.js_hello_output = r.data;
+			});
+			break;
+		case "i2c":
+			$http.get('cgi-bin/run_file.py?path=i2c.js').then(function (r) {
+				$scope.js_hello_output = r.data;
+			});
+			break;
+		default:
+			alert("Unknown example");
+			break;
+		}
+	};
 
     $scope.update = function() {
         $http.get('cgi-bin/cat_file.py?path=hello.js').then(function (r) {
