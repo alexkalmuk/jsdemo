@@ -21,12 +21,36 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
 	$scope.active_example = "hello";
 	$scope.btn_disabled = false;
 
-    $scope.save_hello = function(data) {
-		$scope.js_hello_hl = hljs.highlightAuto(data).value;
+    $scope.save_hello = function(formdata) {
+		$scope.js_hello_hl = hljs.highlightAuto(formdata).value;
+
+		var payload = new FormData();
+		payload.append('data', formdata);
+
+		$http({
+    		method: 'POST',
+    		url: 'cgi-bin/save_file.py',
+    		data: payload,
+    		headers: {'Content-Type': undefined},
+			transformRequest: angular.identity
+		}).then(function(data) {
+    	});
     };
 
-    $scope.save_i2c = function(data) {
-		$scope.js_i2c_hl = hljs.highlightAuto(data).value;
+    $scope.save_i2c = function(formdata) {
+		$scope.js_i2c_hl = hljs.highlightAuto(formdata).value;
+
+		var payload = new FormData();
+		payload.append('data', formdata);
+
+		$http({
+    		method: 'POST',
+    		url: 'cgi-bin/save_file.py',
+    		data: payload,
+    		headers: {'Content-Type': undefined},
+			transformRequest: angular.identity
+		}).then(function(data) {
+    	});
     };
 
 
