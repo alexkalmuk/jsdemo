@@ -39,6 +39,7 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
 
     $scope.click_hello = function() {
 		$scope.active_example = "hello";
+		$scope.js_hello_output = null;
     };
 
     $scope.click_leds = function() {
