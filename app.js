@@ -18,8 +18,8 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
     $scope.js_hello_hl = null;
     $scope.js_i2c_source = null;
     $scope.js_i2c_hl = null;
-
 	$scope.active_example = "hello";
+	$scope.btn_disabled = false;
 
     $scope.save_hello = function(data) {
 		$scope.js_hello_hl = hljs.highlightAuto(data).value;
@@ -47,15 +47,19 @@ app.controller("JSDemoCtrl", ['$scope', '$http', function($scope, $http) {
     };
 
 	$scope.run_js = function() {
+		$scope.btn_disabled = true;
+
 		switch ($scope.active_example) {
 		case "hello":
 			$http.get('cgi-bin/run_file.py?path=hello.js').then(function (r) {
 				$scope.js_hello_output = r.data;
+				$scope.btn_disabled = false;
 			});
 			break;
 		case "i2c":
 			$http.get('cgi-bin/run_file.py?path=i2c.js').then(function (r) {
 				$scope.js_hello_output = r.data;
+				$scope.btn_disabled = false;
 			});
 			break;
 		default:
